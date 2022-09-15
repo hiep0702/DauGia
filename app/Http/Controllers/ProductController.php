@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Supports\Responder;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $data = Product::all();
+        return Responder::success($data, 'Danh sách sản phẩm');
     }
 
     /**
@@ -35,7 +37,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = Product::create($request->all());
+        return Responder::success($data, 'Tạo mới sản phẩm thành công');
     }
 
     /**
@@ -44,9 +47,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $data = Product::find($id);
+        return Responder::success($data, 'Lấy sản phẩm thành công'); 
     }
 
     /**
@@ -67,9 +71,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $data = Product::where('id', $id)->update($request->all());
+        return Responder::success($data, 'Cập nhật sản phẩm thành công');
     }
 
     /**
@@ -78,8 +83,9 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $data = Product::where('id', $id)->delete();
+        return Responder::success($data, 'Xóa sản phẩm thành công');
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuctionController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,10 @@ Route::get('/auction/{id}',[AuctionController::class,'show']);
 Route::post('/auction',[AuctionController::class,'store']);
 Route::put('/auction/{id}',[AuctionController::class,'update']);
 Route::delete('/auction/{id}',[AuctionController::class,'destroy']);
+
+//product
+Route::get('/product',[ProductController::class,'index']);
+Route::get('/product/{id}',[ProductController::class,'show']);
+Route::post('/product',[ProductController::class,'store']);
+Route::put('/product/{id}',[ProductController::class,'update']);
+Route::delete('/product/{id}',[ProductController::class,'destroy']);
