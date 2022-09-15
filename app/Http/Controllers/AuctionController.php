@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Auction;
+use App\Supports\Responder;
 use Illuminate\Http\Request;
 
 class AuctionController extends Controller
@@ -12,9 +13,10 @@ class AuctionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $auctions = Auction::query()->orderByDesc('id')->get();
+        return Responder::success($auctions, 'Danh sach phiên đấu giá');
     }
 
     /**
@@ -24,7 +26,7 @@ class AuctionController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,7 +37,8 @@ class AuctionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data= Auction::create($request->all());
+        return Responder::success($data, 'Tạo phiên đấu giá thành công');
     }
 
     /**
@@ -44,9 +47,10 @@ class AuctionController extends Controller
      * @param  \App\Models\Auction  $auction
      * @return \Illuminate\Http\Response
      */
-    public function show(Auction $auction)
+    public function show($id)
     {
-        //
+        $auction = Auction::find($id);
+        return Responder::success($auction, 'Lấy phiên đấu giá thành công');
     }
 
     /**
@@ -67,9 +71,10 @@ class AuctionController extends Controller
      * @param  \App\Models\Auction  $auction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Auction $auction)
+    public function update(Request $request, $id)
     {
-        //
+        $data = Auction::where('id',$id)->update($request->all());
+        return Responder::success($data,'Cập nhật phiên đấu giá thành công');
     }
 
     /**
@@ -78,8 +83,9 @@ class AuctionController extends Controller
      * @param  \App\Models\Auction  $auction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Auction $auction)
+    public function destroy($id)
     {
-        //
+        $deleteAuction = Auction::query()->where('id',$id)->delete();
+        return Responder::success($deleteAuction, 'Xóa đấu giá thành công');
     }
 }
