@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuctionController;
+use App\Http\Controllers\BidController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SessionController;
 
@@ -41,3 +42,10 @@ Route::get('/session/{id}',[SessionController::class,'show']);
 Route::post('/session',[SessionController::class,'store']);
 Route::put('/session/{id}',[SessionController::class,'update']);
 Route::delete('/session/{id}',[SessionController::class,'destroy']);
+
+//bid
+Route::get('/bid',[BidController::class,'index']);
+Route::get('/bid/{id}',[BidController::class,'show']);
+Route::post('/bid',[BidController::class,'store']);
+Route::put('/bid/{id}',[BidController::class,'update']);
+Route::delete('/bid/{id}',[BidController::class,'destroy']);
