@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,10 @@ Route::get('/product/{id}',[ProductController::class,'show']);
 Route::post('/product',[ProductController::class,'store']);
 Route::put('/product/{id}',[ProductController::class,'update']);
 Route::delete('/product/{id}',[ProductController::class,'destroy']);
+
+//session
+Route::get('/session',[SessionController::class,'index']);
+Route::get('/session/{id}',[SessionController::class,'show']);
+Route::post('/session',[SessionController::class,'store']);
+Route::put('/session/{id}',[SessionController::class,'update']);
+Route::delete('/session/{id}',[SessionController::class,'destroy']);

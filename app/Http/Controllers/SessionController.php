@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Session;
+use App\Supports\Responder;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
@@ -14,7 +15,8 @@ class SessionController extends Controller
      */
     public function index()
     {
-        //
+        $data = Session::all();
+        return Responder::success($data, 'Danh sách session');
     }
 
     /**
@@ -35,7 +37,8 @@ class SessionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = Session::create($request->all());
+        return Responder::success($data, 'Tạo session thành công');
     }
 
     /**
@@ -44,9 +47,10 @@ class SessionController extends Controller
      * @param  \App\Models\Session  $session
      * @return \Illuminate\Http\Response
      */
-    public function show(Session $session)
+    public function show($id)
     {
-        //
+        $data = Session::find($id);
+        return Responder::success($data, 'Lấy session thành công');
     }
 
     /**
@@ -67,9 +71,10 @@ class SessionController extends Controller
      * @param  \App\Models\Session  $session
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Session $session)
+    public function update(Request $request, $id)
     {
-        //
+        $data = Session::where('id', $id)->update($request->all());
+        return Responder::success($data, 'Cập nhật session thành công');
     }
 
     /**
@@ -78,8 +83,9 @@ class SessionController extends Controller
      * @param  \App\Models\Session  $session
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Session $session)
+    public function destroy($id)
     {
-        //
+        $data = Session::where('id', $id)->delete();
+        return Responder::success($data, 'Xóa session thành công');
     }
 }
