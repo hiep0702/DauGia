@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bid;
+use App\Supports\Responder;
 use Illuminate\Http\Request;
 
 class BidController extends Controller
@@ -14,7 +15,8 @@ class BidController extends Controller
      */
     public function index()
     {
-        //
+        $data = Bid::all();
+        return Responder::success($data, 'Danh sách bids');
     }
 
     /**
@@ -35,7 +37,8 @@ class BidController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = Bid::create($request->all());
+        return Responder::success($data, 'Tạo bid thành công');
     }
 
     /**
@@ -44,9 +47,10 @@ class BidController extends Controller
      * @param  \App\Models\Bid  $bid
      * @return \Illuminate\Http\Response
      */
-    public function show(Bid $bid)
+    public function show($id)
     {
-        //
+        $data = Bid::find($id);
+        return Responder::success($data, 'Lấy bid thành công');
     }
 
     /**
@@ -67,9 +71,10 @@ class BidController extends Controller
      * @param  \App\Models\Bid  $bid
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bid $bid)
+    public function update(Request $request, $id)
     {
-        //
+        $data = Bid::where('id', $id)->update($request->all());
+        return Responder::success($data, 'Cập nhật bid thành công');
     }
 
     /**
@@ -78,8 +83,9 @@ class BidController extends Controller
      * @param  \App\Models\Bid  $bid
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bid $bid)
+    public function destroy($id)
     {
-        //
+        $data = Bid::where('id', $id)->delete();
+        return Responder::success($data, 'Xóa bid thành công');
     }
 }

@@ -15,8 +15,8 @@ class AuctionController extends Controller
      */
     public function index(Request $request)
     {
-        $auctions = Auction::query()->orderByDesc('id')->get();
-        return Responder::success($auctions, 'Danh sach phiên đấu giá');
+        $data = Auction::all();
+        return Responder::success($data, 'Danh sach phiên đấu giá');
     }
 
     /**
@@ -49,8 +49,8 @@ class AuctionController extends Controller
      */
     public function show($id)
     {
-        $auction = Auction::find($id);
-        return Responder::success($auction, 'Lấy phiên đấu giá thành công');
+        $data = Auction::find($id);
+        return Responder::success($data, 'Lấy phiên đấu giá thành công');
     }
 
     /**
@@ -85,7 +85,7 @@ class AuctionController extends Controller
      */
     public function destroy($id)
     {
-        $deleteAuction = Auction::query()->where('id',$id)->delete();
-        return Responder::success($deleteAuction, 'Xóa đấu giá thành công');
+        $data = Auction::query()->where('id',$id)->delete();
+        return Responder::success($data, 'Xóa đấu giá thành công');
     }
 }
