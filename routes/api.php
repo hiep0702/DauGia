@@ -6,6 +6,7 @@ use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,10 @@ Route::get('/bid/{id}',[BidController::class,'show']);
 Route::post('/bid',[BidController::class,'store']);
 Route::put('/bid/{id}',[BidController::class,'update']);
 Route::delete('/bid/{id}',[BidController::class,'destroy']);
+
+//user
+Route::get('/user',[UserController::class,'index']);
+Route::get('/user/{id}',[UserController::class,'show']);
+Route::post('/user',[UserController::class,'store']);
+Route::put('/user/{id}',[UserController::class,'update']);
+Route::delete('/user/{id}',[UserController::class,'destroy']);

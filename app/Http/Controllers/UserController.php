@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Supports\Responder;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $data = User::all();
+        return Responder::success($data, 'Danh sách tài khoản');
     }
 
     /**
@@ -35,7 +37,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = User::create($request->all());
+        return Responder::success($data, 'Tạo tài khoản thành công');
     }
 
     /**
@@ -44,9 +47,10 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $data = User::find($id);
+        return Responder::success($data, 'Tìm kiếm tài khoản thành công');
     }
 
     /**
@@ -67,9 +71,10 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        $data = User::where('id', $id)->update($request->all());
+        return Responder::success($data, 'Cập nhật tài khoản thành công');
     }
 
     /**
@@ -78,8 +83,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+        $data = User::where('id', $id)->delete();
+        return Responder::success($data, 'Xóa tài khoản thành công');
     }
 }
